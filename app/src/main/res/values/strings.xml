@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVP RecyclerView</string>
+    <string name="no_data_msg">No Data</string>
+</resources>
