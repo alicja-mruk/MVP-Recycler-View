@@ -1,13 +1,9 @@
 package com.mvp.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.mvp.model.Movie
-import kotlinx.android.synthetic.main.item_movie_model.view.*
+import com.mvp.model.pojo.Movie
 
 
 class MoviesAdapter (private val list: List<Movie>,

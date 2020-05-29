@@ -1,9 +1,8 @@
 package com.mvp.presenter
 
 import com.mvp.contractor.MoviesListContract
-import com.mvp.model.Movie
+import com.mvp.model.pojo.Movie
 import com.mvp.model.repository.MovieRepository
-import com.mvp.model.repository.SimulateMovieClient
 
 class MoviesPresenter(
     _view: MoviesListContract.View?,
@@ -32,11 +31,10 @@ class MoviesPresenter(
             view?.hideProgressBar()
         }
 
-        override fun onError(errorMessage: String) {
+        override fun onError(errorMessage: String?) {
             view?.hideProgressBar()
             view?.showLoadingError(errorMessage)
         }
-
     }
 
 }

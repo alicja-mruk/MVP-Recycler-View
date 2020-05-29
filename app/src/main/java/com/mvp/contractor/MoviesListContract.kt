@@ -1,6 +1,6 @@
 package com.mvp.contractor
 
-import com.mvp.model.Movie
+import com.mvp.model.pojo.Movie
 
 
 interface MoviesListContract {
@@ -11,7 +11,7 @@ interface MoviesListContract {
         fun showProgressBar()
         fun hideProgressBar()
         fun showMovieList(movies : List<Movie>)
-        fun showLoadingError(errorMessage: String)
+        fun showLoadingError(errorMessage: String?)
     }
 
     interface Presenter{
@@ -21,6 +21,6 @@ interface MoviesListContract {
 
     interface OnResponseCallback{
         fun onResponse(movies: List<Movie>)
-        fun onError(errorMessage : String)
+        fun onError(errorMessage : String?)
     }
 }

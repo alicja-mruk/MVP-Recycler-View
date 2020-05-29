@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mvprecyclerview.R
 import com.mvp.contractor.MoviesListContract
-import com.mvp.model.Movie
+import com.mvp.model.pojo.Movie
 import com.mvp.model.repository.SimulateMovieClient
 import com.mvp.presenter.MoviesPresenter
 import com.mvp.view.adapter.ItemClickListener
@@ -80,8 +80,10 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
         }
     }
 
-    override fun showLoadingError(errorMessage: String) {
-        hideProgressBarAndShowError(errorMessage)
+    override fun showLoadingError(errorMessage: String?) {
+        if (errorMessage != null) {
+            hideProgressBarAndShowError(errorMessage)
+        }
         showOrHideRecyclerView(false)
     }
 
