@@ -1,23 +1,24 @@
 package com.mvp.model.repository
 
 
-import android.util.Log
-import androidx.core.content.res.TypedArrayUtils.getText
-import com.example.mvprecyclerview.R
+
 import com.mvp.contractor.MoviesListContract
+import com.mvp.model.network.connection.NetworkStatus
+import com.mvp.model.network.connection.NetworkStatusImpl
 import com.mvp.model.pojo.MoviesResult
-import com.mvp.model.retrofit.MovieApiService
-import com.mvp.model.retrofit.ServiceBuilder
+import com.mvp.model.network.request.MovieApiService
+import com.mvp.model.network.request.ServiceBuilder
+import dagger.Module
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class SimulateMovieClient : MovieRepository {
     //get data from network/api
 
     override fun getMovieList(onResponseCallback: MoviesListContract.OnResponseCallback) {
-        val request  = ServiceBuilder.buildService(MovieApiService::class.java)
+        val request  = ServiceBuilder.buildService(
+            MovieApiService::class.java)
         val call = request.getMovies(API_KEY)
 
             call.enqueue(object: Callback <MoviesResult> {

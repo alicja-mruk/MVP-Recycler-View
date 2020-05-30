@@ -1,6 +1,5 @@
-package com.mvp.model.retrofit
+package com.mvp.model.network.request
 
-import com.mvp.model.pojo.Movie
 import com.mvp.model.pojo.MoviesResult
 import retrofit2.Call
 import retrofit2.http.GET

@@ -1,8 +1,13 @@
 package com.mvp.presenter
 
+import android.content.Intent
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.mvp.contractor.MoviesListContract
+import com.mvp.model.network.connection.NetworkStatusImpl
 import com.mvp.model.pojo.Movie
 import com.mvp.model.repository.MovieRepository
+import com.mvp.view.DetailsActivity
 
 class MoviesPresenter(
     _view: MoviesListContract.View?,
@@ -19,10 +24,22 @@ class MoviesPresenter(
         view = null
     }
 
-    override fun loadMovieList() {
-        view?.showProgressBar()
-        client.getMovieList(callback)
+    override fun openDetailsActivity(movie:Movie) {
+        val intent = Intent(view?.getContext(), DetailsActivity::class.java )
+        intent.putExtra(MOVIE_KEY, movie)
+        view?.getContext()?.startActivity(intent)
+    }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun loadMovieList() {
+        val networkStatus = NetworkStatusImpl(view!!.getContext())
+        if(networkStatus.isOnline()) {
+            view?.showProgressBar()
+            client.getMovieList(callback)
+        }else{
+            view?.hideProgressBar()
+            view?.showToast(NO_NETWORK_CONNECTION)
+        }
     }
 
     private var callback = object : MoviesListContract.OnResponseCallback {
@@ -35,6 +52,11 @@ class MoviesPresenter(
             view?.hideProgressBar()
             view?.showLoadingError(errorMessage)
         }
+    }
+
+    companion object{
+        const val NO_NETWORK_CONNECTION = "No network connection"
+        const val MOVIE_KEY = "movie"
     }
 
 }

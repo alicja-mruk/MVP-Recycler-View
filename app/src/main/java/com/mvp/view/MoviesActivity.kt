@@ -1,5 +1,6 @@
 package com.mvp.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,8 +13,8 @@ import com.mvp.contractor.MoviesListContract
 import com.mvp.model.pojo.Movie
 import com.mvp.model.repository.SimulateMovieClient
 import com.mvp.presenter.MoviesPresenter
-import com.mvp.view.adapter.ItemClickListener
-import com.mvp.view.adapter.MoviesAdapter
+import com.mvp.util.adapter.ItemClickListener
+import com.mvp.util.adapter.MoviesAdapter
 import kotlinx.android.synthetic.main.activity_movies.*
 
 class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
@@ -41,6 +42,11 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
 
         )
     }
+
+    override fun getContext(): Context {
+        return this
+    }
+
     private val listener  = SwipeRefreshLayout.OnRefreshListener { presenter?.loadMovieList() }
 
     override fun showProgressBar() {
@@ -71,8 +77,10 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
                 adapter = MoviesAdapter(movies, object : ItemClickListener {
                     override fun clickRow(position: Int) {
                        //TODO do some action while click performed
-                        val title = movies[position].title
-                        Toast.makeText(applicationContext, "Clicked at $title", Toast.LENGTH_SHORT).show()
+                        val item = movies[position]
+                    //    val title = movies[position].title
+                        presenter?.openDetailsActivity(item)
+                       // Toast.makeText(applicationContext, "Clicked at $title", Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -92,6 +100,10 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         showOrHideRecyclerView(false)
 
+    }
+
+    override fun showToast(message: String) {
+       Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
