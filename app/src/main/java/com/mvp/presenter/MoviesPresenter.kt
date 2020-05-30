@@ -25,8 +25,9 @@ class MoviesPresenter(
     }
 
     override fun openDetailsActivity(movie:Movie) {
-        val intent = Intent(view?.getContext(), DetailsActivity::class.java )
-        intent.putExtra(MOVIE_KEY, movie)
+        val intent = Intent(view?.getContext(), DetailsActivity::class.java ).apply {
+            putExtra(MOVIE_KEY, movie)
+        }
         view?.getContext()?.startActivity(intent)
     }
 

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MVP RecyclerView</string>
     <string name="no_data_msg">No Data</string>
+    <string name="adults">Proper for kids?</string>
+    <string name="release_date">Release Date</string>
+    <string name="votes_number">Number of Votes</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

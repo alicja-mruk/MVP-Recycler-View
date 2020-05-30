@@ -14,7 +14,7 @@ interface MoviesListContract {
         fun hideProgressBar()
         fun showMovieList(movies : List<Movie>)
         fun showLoadingError(errorMessage: String?)
-        fun showToast(message : String)
+        fun showToast(message  : String)
     }
 
     interface Presenter {

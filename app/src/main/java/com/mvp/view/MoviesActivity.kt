@@ -78,9 +78,7 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
                     override fun clickRow(position: Int) {
                        //TODO do some action while click performed
                         val item = movies[position]
-                    //    val title = movies[position].title
                         presenter?.openDetailsActivity(item)
-                       // Toast.makeText(applicationContext, "Clicked at $title", Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -95,15 +93,15 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
         showOrHideRecyclerView(false)
     }
 
+    override fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun hideProgressBarAndShowError(message: String) {
         no_message.visibility = View.VISIBLE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         showOrHideRecyclerView(false)
 
-    }
-
-    override fun showToast(message: String) {
-       Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
