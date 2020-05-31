@@ -1,6 +1,7 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tasksContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,22 +9,26 @@
 
     <TextView
         android:id="@+id/no_message"
-        android:text="@string/no_data_msg"
-        android:gravity="center|center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="center|center_horizontal"
+        android:text="@string/no_data_msg"
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="-109dp" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-31dp"
+        tools:layout_editor_absoluteY="126dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movies_recyclerView"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

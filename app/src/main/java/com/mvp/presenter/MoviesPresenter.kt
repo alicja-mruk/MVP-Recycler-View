@@ -43,6 +43,7 @@ class MoviesPresenter(
         }
     }
 
+
     private var callback = object : MoviesListContract.OnResponseCallback {
         override fun onResponse(movies: List<Movie>) {
             view?.showMovieList(movies)

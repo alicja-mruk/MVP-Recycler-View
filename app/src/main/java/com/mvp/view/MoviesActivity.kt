@@ -13,11 +13,12 @@ import com.mvp.contractor.MoviesListContract
 import com.mvp.model.pojo.Movie
 import com.mvp.model.repository.SimulateMovieClient
 import com.mvp.presenter.MoviesPresenter
+import com.mvp.util.MovieData
 import com.mvp.util.adapter.ItemClickListener
 import com.mvp.util.adapter.MoviesAdapter
 import kotlinx.android.synthetic.main.activity_movies.*
 
-class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
+class MoviesActivity : AppCompatActivity(), MoviesListContract.View{
     private  var presenter : MoviesListContract.Presenter ? = null
     private var adapter: MoviesAdapter? = null
 
@@ -76,7 +77,7 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
                 layoutManager = LinearLayoutManager(context)
                 adapter = MoviesAdapter(movies, object : ItemClickListener {
                     override fun clickRow(position: Int) {
-                       //TODO do some action while click performed
+
                         val item = movies[position]
                         presenter?.openDetailsActivity(item)
                     }
@@ -108,5 +109,6 @@ class MoviesActivity : AppCompatActivity(), MoviesListContract.View {
         super.onDestroy()
         presenter?.dropView()
     }
+
 
 }

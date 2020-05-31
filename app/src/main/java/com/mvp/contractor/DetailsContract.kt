@@ -1,12 +1,13 @@
 package com.mvp.contractor
 
 import android.content.Context
-import android.os.Bundle
-import com.mvp.view.OnlyForAdults
+import com.mvp.model.pojo.Movie
+import com.mvp.util.MovieData
+import com.mvp.util.OnlyForAdults
 
 interface DetailsContract {
 
-    interface View{
+    interface View : MovieData {
 
         fun initView()
         fun showToast(message : String)
@@ -16,6 +17,7 @@ interface DetailsContract {
 
     interface Presenter : OnlyForAdults {
         fun loadDataIntoView()
+        fun getMovieData() : Movie?
         fun dropView()
     }
 

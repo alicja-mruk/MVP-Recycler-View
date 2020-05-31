@@ -2,12 +2,14 @@ package com.mvp.presenter
 
 
 import com.mvp.contractor.DetailsContract
-import com.mvp.view.OnlyForAdults
+import com.mvp.model.pojo.Movie
+import com.mvp.util.OnlyForAdults
 
 
 class DetailsPresenter(
     _view: DetailsContract.View?
-) : DetailsContract.Presenter, OnlyForAdults{
+) : DetailsContract.Presenter, OnlyForAdults {
+
     private var view :DetailsContract.View? = _view
 
     init {
@@ -18,11 +20,15 @@ class DetailsPresenter(
         view?.updateView()
     }
 
+    override fun getMovieData(): Movie? {
+        return view?.getMovieDataFromActivity()
+    }
+
     override fun dropView() {
         view = null
     }
 
-    override fun onlyForAdults(adult: Boolean?): Boolean {
-        return adult!!
+    override fun onlyForAdults() : Boolean{
+     return getMovieData()?.adult == true
     }
 }

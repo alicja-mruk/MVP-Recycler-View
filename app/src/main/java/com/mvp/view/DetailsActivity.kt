@@ -10,22 +10,25 @@ import com.mvp.contractor.DetailsContract
 import com.mvp.model.pojo.Movie
 import com.mvp.presenter.DetailsPresenter
 import com.mvp.presenter.MoviesPresenter
+import com.mvp.util.MovieData
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity (
-): AppCompatActivity(), DetailsContract.View {
+): AppCompatActivity(), DetailsContract.View{
+
     private  var presenter : DetailsContract.Presenter ? = null
-    private var movie : Movie? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
         presenter = DetailsPresenter(this)
-        movie = intent.getParcelableExtra(MoviesPresenter.MOVIE_KEY)
         initView()
     }
 
     override fun initView() {
-       presenter?.loadDataIntoView()
+        actionBar?.hide()
+        presenter?.loadDataIntoView()
     }
 
     override fun showToast(message: String) {
@@ -33,10 +36,13 @@ class DetailsActivity (
     }
 
     override fun updateView() {
-        if(presenter?.onlyForAdults(movie?.adult)!!){
-            for_adult_details.text = getString(R.string.no)
-        }else {
-            for_adult_details.text = getString(R.string.yes)
+        val movie : Movie? = presenter?.getMovieData()
+        if (movie != null) {
+            if(presenter?.onlyForAdults()!!){
+                for_adult_details.text = getString(R.string.no)
+            }else {
+                for_adult_details.text = getString(R.string.yes)
+            }
         }
             title_details.text = movie?.title
             Glide.with(this)
@@ -56,7 +62,12 @@ class DetailsActivity (
         presenter?.dropView()
     }
 
+    override fun getMovieDataFromActivity(): Movie? {
+        return intent.getParcelableExtra(MoviesPresenter.MOVIE_KEY)
+    }
+
     companion object{
         const val IMG_PATH = "https://image.tmdb.org/t/p/w300/"
     }
+
 }
